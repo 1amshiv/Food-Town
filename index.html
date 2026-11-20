@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Food Town | Fast Food Delivery</title>
+<meta name="description" content="Order fresh meals online and get them delivered to your door in 30 minutes.">
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header class="site-header">
+<p class="logo">Food Town</p>
+<nav aria-label="Main menu">
+<ul>
+<li><a href="#menu" data-view="home">Home</a></li>
+<li><a href="#cart" data-view="cart">Cart (<span id="cartCount">0</span>)</a></li>
+<li><a href="#areas" data-view="home">Delivery Areas</a></li>
+<li><a href="#order" data-view="order">Order</a></li>
+<li><a href="#history" data-view="history">Order History</a></li>
+</ul>
+</nav>
+</header>
+<main id="main">
+<section class="hero" data-view="home">
+<h1>Hot food at your door in 30 minutes</h1>
+<p>Pizza, burgers, rolls and more from the best kitchens near you.</p>
+<p class="badge">We deliver inside LPU and within 6 km of the LPU campus.</p>
+<a class="btn" href="#menu" data-view="home">Order now</a>
+</section>
+<section id="menu" data-view="home">
+<h2>Our Menu</h2>
+<div class="filters">
+<button class="filter active" data-cat="all">All</button>
+<button class="filter" data-cat="pizza">Pizza</button>
+<button class="filter" data-cat="burger">Burgers</button>
+<button class="filter" data-cat="rolls">Rolls</button>
+<button class="filter" data-cat="drinks">Drinks</button>
+</div>
+<div id="menuList" class="cards"></div>
+</section>
+<section id="cart" data-view="cart">
+<h2>Your Cart</h2>
+<div class="table-wrapper">
+<table>
+<caption>Items in your cart</caption>
+<thead>
+<tr>
+<th scope="col">Item</th>
+<th scope="col">Price</th>
+<th scope="col">Quantity</th>
+<th scope="col">Total</th>
+</tr>
+</thead>
+<tbody id="cartBody"></tbody>
+<tfoot>
+<tr><th scope="row" colspan="3">Subtotal</th><td id="subtotal">Rs. 0</td></tr>
+<tr><th scope="row" colspan="3">Discount</th><td id="discount">Rs. 0</td></tr>
+<tr><th scope="row" colspan="3">Delivery fee</th><td id="fee">Rs. 0</td></tr>
+<tr><th scope="row" colspan="3">Grand total</th><td id="grand">Rs. 0</td></tr>
+</tfoot>
+</table>
+</div>
+<div class="coupon">
+<label for="coupon">Coupon code</label>
+<input type="text" id="coupon" placeholder="Try FIRST10">
+<button id="applyCoupon" type="button" class="btn">Apply</button>
+</div>
+<p id="couponMsg" role="status"></p>
+<a class="btn" href="#order" data-view="order">Proceed to order</a>
+</section>
+<section id="areas" data-view="home">
+<h2>Delivery Areas</h2>
+<div class="table-wrapper">
+<table>
+<caption>Delivery time and charges</caption>
+<thead>
+<tr>
+<th scope="col">Area</th>
+<th scope="col">Time</th>
+<th scope="col">Charge</th>
+</tr>
+</thead>
+<tbody>
+<tr><th scope="row">Inside LPU campus</th><td>15-25 min</td><td>Rs. 40</td></tr>
+<tr><th scope="row">Within 3 km of LPU</th><td>20-30 min</td><td>Rs. 40</td></tr>
+<tr><th scope="row">3 to 6 km from LPU</th><td>30-45 min</td><td>Rs. 60</td></tr>
+<tr><th scope="row">Above 6 km from LPU</th><td>Not available</td><td>-</td></tr>
+</tbody>
+</table>
+</div>
+<p>We deliver only inside LPU and within 6 km of the LPU campus. Delivery is free on orders of Rs. 500 and above.</p>
+</section>
+<section id="order" data-view="order">
+<h2>Place Your Order</h2>
+<form id="orderForm" class="order-form" method="post" aria-label="Order form">
+<fieldset>
+<legend>Delivery details</legend>
+<label for="name">Full name *</label>
+<input type="text" id="name" name="name" required minlength="3" maxlength="40">
+<label for="mobile">Mobile number *</label>
+<input type="tel" id="mobile" name="mobile" data-digits maxlength="10" inputmode="numeric" required pattern="[6-9][0-9]{9}" title="10-digit mobile number starting with 6, 7, 8 or 9">
+<label for="address">Address (inside LPU or within 6 km of LPU) *</label>
+<textarea id="address" name="address" rows="3" required minlength="10" maxlength="150"></textarea>
+</fieldset>
+<fieldset>
+<legend>Payment</legend>
+<input type="radio" id="cod" name="pay" value="Cash on delivery" checked>
+<label for="cod" class="inline">Cash on delivery</label>
+<input type="radio" id="bank" name="pay" value="Net banking">
+<label for="bank" class="inline">Net banking</label>
+<div id="bankBox" hidden>
+<label for="bankName">Bank *</label>
+<select id="bankName" name="bankName">
+<option value="">-- Choose bank --</option>
+<option>State Bank of India</option>
+<option>HDFC Bank</option>
+<option>ICICI Bank</option>
+<option>Punjab National Bank</option>
+</select>
+<label for="accNo">Account number *</label>
+<input type="text" id="accNo" name="accNo" data-digits maxlength="18" inputmode="numeric" pattern="[0-9]{9,18}" title="9 to 18 digits">
+<label for="bankPass">Bank password *</label>
+<input type="password" id="bankPass" name="bankPass" minlength="6" maxlength="20" autocomplete="off">
+</div>
+</fieldset>
+<input type="checkbox" id="terms" name="terms" required>
+<label for="terms" class="inline">I accept the delivery terms *</label>
+<br>
+<button type="submit" class="btn">Place order</button>
+</form>
+<p id="orderMsg" role="status"></p>
+</section>
+<section id="history" data-view="history">
+<h2>Order History</h2>
+<ul id="historyList"></ul>
+</section>
+<section data-view="home">
+<h2>FAQ</h2>
+<details>
+<summary>How can I track my order?</summary>
+<p>You will get a call from the delivery partner once the food leaves the kitchen.</p>
+</details>
+<details>
+<summary>Can I cancel my order?</summary>
+<p>Orders can be cancelled within 5 minutes of placing them.</p>
+</details>
+</section>
+</main>
+<footer>
+<address>Delivering inside LPU and within 6 km of LPU. Contact us: <a href="https://mail.google.com/mail/?view=cm&to=optimisticp99@gmail.com" target="_blank" rel="noopener">optimisticp99@gmail.com</a></address>
+<p><small>&copy; 2026 Food Town. All rights reserved.</small></p>
+</footer>
+<div id="toast" role="status"></div>
+</body>
+</html>
