@@ -107,5 +107,5 @@ Delivery is free on orders of Rs. 500 and above.
 **Shivansh Tripathi**
 
 - GitHub: [@1amshiv](https://github.com/1amshiv/)
-- LinkedIn: [Shivansh Tripathi](https://www.linkedin.com/in/shivansh-tripathi-abbb2242a/)
+  
 
